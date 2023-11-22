@@ -1,0 +1,45 @@
+﻿@using Etat_de_stock_client.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .myform{
+        box-shadow: 3px 3px 3px 3px grey;
+        border-radius: 4px;
+    }
+</style>
+
+<h2>Etat de stock</h2>
+<hr />
+
+<div class="col-sm-7 myform" style="border: 1px solid black">
+    <center>
+        <form action=@Url.Action("ConsulterEtatDeStock") method="post">
+            <center><h3 style="font-family: 'Times New Roman'">Voir votre etat de stock</h3></center><br />
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Magasin:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="magasin">
+                        <option></option>
+                        @foreach (Magasin magasin in ViewBag.magasins)
+                        {
+                            <option value="@magasin.idMagasin">@magasin.idMagasin</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Date de debut:</label>
+                <input type="date" class="form-control" name="dateInitiale" />
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Date de debut:</label>
+                <input type="date" class="form-control" name="dateFinale" />
+            </div>
+            <center><button type="submit" class="btn btn-primary">Voir</button></center><br />
+            <figcaption style="color: grey">Laissez le champ magasin vide si vous voulez voir l'etat de stock de tous les magasins</figcaption><br />
+        </form>
+    </center>
+</div>
+

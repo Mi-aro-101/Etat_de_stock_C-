@@ -1,0 +1,60 @@
+﻿@using Etat_de_stock_client.Models;
+@{
+    ViewBag.Title = "Sortie";
+}
+
+<style>
+    .myform {
+        box-shadow: 3px 3px 3px 3px grey;
+        border-radius: 4px;
+    }
+</style>
+
+<h2>Sortie</h2>
+<hr />
+
+@if(ViewBag.error != null)
+{
+    <h3 style="color: red">@ViewBag.error</h3>
+}
+
+<div class="col-sm-7 myform" style="border: 1px solid black">
+    <center>
+        <form action=@Url.Action("InsererSortie") method="post">
+            <center><h2 style="font-family: 'Times New Roman'">Inserer un sortie</h2></center><br />
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Article:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="article">
+                        @foreach (Article article in ViewBag.articles)
+                        {
+                            <option value="@article.idArticle">@article.desArticle</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Magasin:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="magasin">
+                        @foreach (Magasin magasin in ViewBag.magasins)
+                        {
+                            <option value="@magasin.idMagasin">@magasin.idMagasin</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Date de sortie:</label>
+                <input type="date" class="form-control" name="dateSortie" />
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Quantite:</label>
+                <input type="text" class="form-control" name="quantite" />
+            </div>
+            <center><button type="submit" class="btn btn-warning">Inserer</button></center><br />
+            <figcaption style="color: grey">Laissez le champ date vide si c'est au moment meme que vous inserer</figcaption><br />
+        </form>
+    </center>
+</div>
+

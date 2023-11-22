@@ -1,0 +1,54 @@
+﻿@using Etat_de_stock_client.Models;
+@using System.Globalization;
+@{
+    ViewBag.Title = "ConsulterEtatDeStock";
+}
+
+@{
+    CultureInfo frenchCulture = new CultureInfo("fr-FR");
+}
+
+@*@ViewBag.response*@
+
+@*@foreach (Entree entre in ViewBag.entrees)
+{
+    <p>@entre.article.des_article</p>
+}*@
+
+<center><h2>Consultation de l'etat de stock</h2></center>
+
+<div class="card">
+        <div class="card-header">
+            <h4>Entre @ViewBag.dateDebut.ToString("dd MMMM yyyy", frenchCulture) et @ViewBag.dateFin.ToString("dd MMMM yyyy", frenchCulture)</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Magasin</th>
+                        <th scope="col">Article</th>
+                        <th scope="col">Quantite initiale</th>
+                        <th scope="col">Quantite en reste</th>
+                        <th scope="col">Prix Unitaire</th>
+                        <th scope="col">Montant</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Stock stock in ViewBag.stocks)
+                    {
+                        <tr>
+                            <td scope="row">@stock.magasin.idMagasin</td>
+                            <td>@stock.article.desArticle</td>
+                            <td style="text-align:right">@stock.QuantiteInitiale.ToString("#,##0.00")</td>
+                            <td style="text-align:right">@stock.QuantiteReste.ToString("#,##0.00")</td>
+                            <td style="text-align:right">@stock.PrixUnitaire.ToString("#,##0.00")</td>
+                            <td style="text-align:right">@stock.Montant.ToString("#,##0.00")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a href='@Url.Action("Index")'><button class="btn btn-info">Retour</button></a>
+
